@@ -1,6 +1,6 @@
 import { ButtonActive } from "../../GlobalComponent/button";
 import Icon from "@material-ui/core/Icon";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { GoogleLogin } from "react-google-login";
 import FacebookLogin from "react-facebook-login";
 import FacebookLogo from "../../../asserts/img/icon/facebook-circular-logo.svg";

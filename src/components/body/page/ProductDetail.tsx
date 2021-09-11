@@ -125,7 +125,7 @@ const ProductInfo = (props: any) => {
     useEffect(() => {
         AOS.init();
         window.scrollTo(0, 0);
-        GetData(`http://localhost:5000/api/detail/${productId}`).then(
+        GetData(`${process.env.REACT_APP_SERVER_URL}/api/detail/${productId}`).then(
             (res: any) => {
                 setProductDetail(res[0]);
             }

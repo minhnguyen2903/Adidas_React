@@ -15,7 +15,7 @@ const Helper = {
         return result;
     },
     UpdateSearchResult: async(dispatch: any, key: any, callback?: any) => {
-        await Request.GetData(`http://localhost:5000/api/search${key}`)
+        await Request.GetData(`${process.env.REACT_APP_SERVER_URL}/api/search${key}`)
         .then((result: any) => {
             dispatch(RemoveSearchResult());
             result.forEach((element: any) => {

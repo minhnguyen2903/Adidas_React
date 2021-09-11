@@ -4,7 +4,6 @@ import { Slider, ProductSlide } from "../../GlobalComponent/slider";
 import { VideoCard } from "../../GlobalComponent/Card";
 import * as ButtonComponent from "../../GlobalComponent/button";
 import { useSelector } from "react-redux";
-import { useEffect } from "react";
 
 const BodyComponent = () => {
     const products = useSelector((state: any) => state.allProducts.products);

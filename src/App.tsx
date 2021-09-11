@@ -77,7 +77,7 @@ function App() {
     };
 
     useEffect(() => {
-        Request.GetData("http://localhost:5000/api/all-products").then(
+        Request.GetData(`${process.env.REACT_APP_SERVER_URL}/api/all-products`).then(
             (result: any) => {
                 dispatch(GetAllProduct(result));
             }
