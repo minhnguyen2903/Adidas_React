@@ -1,0 +1,73 @@
+.button_light {
+    color: white;
+}
+
+.button_light>* {
+    color: black !important;
+    background: white !important;
+}
+
+.button_active {
+    position: relative;
+    width: max-content;
+}
+
+.button_active::after {
+    z-index: 1;
+    position: absolute;
+    content: "";
+    width: calc(100% - 1px);
+    height: calc(100% - 1px);
+    top: 4px;
+    left: 4px;
+    border: solid 1px;
+}
+
+.button_active button {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    height: 50px;
+    align-items: center;
+    padding: 0 21px;
+    gap: 20px;
+    outline: 0;
+    border: none;
+    background: #000000;
+}
+
+.button_active span {
+    color: white;
+}
+
+.transition_button:active {
+    transform: translate(3px, 3px);
+}
+
+.button_hover {
+    width: max-content;
+    border: solid 1px;
+}
+
+.button_hover:active {
+    transform: scale(0.98);
+}
+
+.button_hover button {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    height: 50px;
+    align-items: center;
+    padding: 0 21px;
+    gap: 20px;
+    background: white;
+    color: black;
+    outline: 0;
+    border: none;
+    transition: 0.3s;
+}
+
+.button_hover button:hover {
+    opacity: 0.6;
+}

@@ -1,0 +1,41 @@
+div.target_hover {
+    cursor: pointer;
+    border: solid 1px #d3d7da !important;
+}
+
+.target_hover:hover {
+    border-color: black !important;
+}
+
+.button_hover span {
+    color: black;
+    border-color: black !important;
+}
+
+.button_hover:hover {
+    background: black !important;
+}
+
+.button_hover:hover span {
+    color: white !important;
+    border-color: white !important;
+}
+
+.card_hover {
+    border: solid 1px transparent;
+}
+
+.card_hover:hover {
+    border-color: black;
+}
+
+.card_hover:hover .card_hover_price {
+    bottom: 0.5em;
+}
+
+.card_hover_price {
+    position: absolute;
+    bottom: 0;
+    left: 0.5em;
+    transition: 0.1s;
+}

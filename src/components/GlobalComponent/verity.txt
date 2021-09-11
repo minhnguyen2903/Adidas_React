@@ -1,0 +1,74 @@
+
+import * as Request from "./axiosRequest/request";
+
+export const verifyUser = () => {
+    const token = JSON.parse(String(localStorage.getItem("__token")));
+    if (token !== null) {
+        Request.PostWithAuthentication(
+            "http://localhost:5000/api/posts",
+            token
+        )
+            .then((res: any) => {
+                if (res) {
+                    const cart = JSON.parse(
+                        String(localStorage.getItem("cart"))
+                    );
+                    const wishList = JSON.parse(
+                        String(localStorage.getItem("wishList"))
+                    );
+                    if (cart !== null) {
+                        res.cart.forEach((item: any) => {
+                            let isExist = false;
+                            if (cart.length >= 1) {
+                                cart.forEach((element: any) => {
+                                    if (
+                                        item.productId === element.productId
+                                    ) {
+                                        isExist = true;
+                                    }
+                                });
+                            } else {
+                                if (item.productId === cart.productId) {
+                                    isExist = true;
+                                }
+                            }
+                            if (!isExist) {
+                                saveToLocalStorage("cart", item);
+                            }
+                        });
+                    } else {
+                        saveToLocalStorage("cart", res.cart);
+                    }
+
+                    if (wishList !== null) {
+                        res.wishList.forEach((item: any) => {
+                            let isExist = false;
+                            if (wishList.length >= 1) {
+                                wishList.forEach((element: any) => {
+                                    if (
+                                        item.productId === element.productId
+                                    ) {
+                                        isExist = true;
+                                    }
+                                });
+                            } else {
+                                if (item.productId === wishList.productId) {
+                                    isExist = true;
+                                }
+                            }
+                            if (!isExist) {
+                                saveToLocalStorage("wishList", item);
+                            }
+                        });
+                    } else {
+                        saveToLocalStorage("wishList", res.wishList);
+                    }
+
+                    dispatch(SignIn(true));
+                }
+            })
+            .catch((err: any) => {
+                console.log("err: ", err);
+            });
+    }
+};
