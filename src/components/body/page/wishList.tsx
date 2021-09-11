@@ -116,6 +116,7 @@ const WishListShow = () => {
             <SelectNumber
               number={number}
               handleNumber={handleNumber}
+              element={item}
               type="wishList"
             />
           </div>

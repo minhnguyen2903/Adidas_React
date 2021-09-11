@@ -48,7 +48,7 @@ export const CheckBoxNoAction = (props: any) => {
     const [isChecked, setIsChecked] = useState(false)
 
     return (
-        <div className="filter-dropdown-item text-capitalize d-flex align-items-center position-relative" style={{height: "fit-content"}}>
+        <div className="filter-dropdown-item text-capitalize d-flex align-items-center position-relative w-auto" style={{height: "fit-content"}}>
             <label
                 className={`m-0 w-100 d-flex align-items-center ps-3 ${
                     isChecked ? "filter-dropdown-item-checked" : ""
