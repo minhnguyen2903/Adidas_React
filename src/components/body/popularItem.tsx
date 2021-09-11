@@ -10,7 +10,7 @@ const PopularItem = () => {
                 </div>
                 <div className="row mt-4">
                     <div
-                        className={`text-uppercase border p-2 m-1 ${styles.target_hover}`}
+                        className={`w-auto text-uppercase border p-2 m-1 ${styles.target_hover}`}
                         onClick={() => {
                             window.location.href = "/search?q=nmd";
                         }}
@@ -18,7 +18,7 @@ const PopularItem = () => {
                         nmd
                     </div>
                     <div
-                        className={`text-uppercase border p-2 m-1 ${styles.target_hover}`}
+                        className={`w-auto text-uppercase border p-2 m-1 ${styles.target_hover}`}
                         onClick={() => {
                             window.location.href = "/search?q=superstar";
                         }}
@@ -26,7 +26,7 @@ const PopularItem = () => {
                         superstar
                     </div>
                     <div
-                        className={`text-uppercase border p-2 m-1 ${styles.target_hover}`}
+                        className={`w-auto text-uppercase border p-2 m-1 ${styles.target_hover}`}
                         onClick={() => {
                             window.location.href = "/search?q=slides";
                         }}
@@ -34,7 +34,7 @@ const PopularItem = () => {
                         slides
                     </div>
                     <div
-                        className={`text-uppercase border p-2 m-1 ${styles.target_hover}`}
+                        className={`w-auto text-uppercase border p-2 m-1 ${styles.target_hover}`}
                         onClick={() => {
                             window.location.href = "/search?q=yezzy";
                         }}
@@ -42,7 +42,7 @@ const PopularItem = () => {
                         yezzy
                     </div>
                     <div
-                        className={`text-uppercase border p-2 m-1 ${styles.target_hover}`}
+                        className={`w-auto text-uppercase border p-2 m-1 ${styles.target_hover}`}
                         onClick={() => {
                             window.location.href = "/search?q=ultraboost";
                         }}

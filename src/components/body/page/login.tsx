@@ -9,14 +9,13 @@ import { SignIn } from "../../../redux/action/action";
 import { InputComponent } from "../../GlobalComponent/inputComponent";
 import axios from "axios";
 const Login = () => {
-
     const [user, setUser] = useState({
         email: "",
         password: "",
     });
-    const [disabled, setDisabled] = useState(false)
- 
-    const [invalid, setInvalid] = useState(false)
+    const [disabled, setDisabled] = useState(false);
+
+    const [invalid, setInvalid] = useState(false);
 
     const dispatch = useDispatch();
 
@@ -50,18 +49,22 @@ const Login = () => {
     const onFormSubmit = async (e: any) => {
         try {
             e.preventDefault();
-            setDisabled(true)
+            setDisabled(true);
             const data = new FormData();
             data.append("email", user.email);
             data.append("password", user.password);
             axios
                 .post(`${process.env.REACT_APP_SERVER_URL}/login`, data)
                 .then((res: any) => {
-                    setInvalid(false)
+                    setInvalid(false);
                     localStorage.setItem("__token", res.data);
                     dispatch(SignIn(true));
-                    window.location.href="/"
-                }).catch((err: any) => {setInvalid(true);setDisabled(false)});
+                    window.location.href = "/";
+                })
+                .catch((err: any) => {
+                    setInvalid(true);
+                    setDisabled(false);
+                });
         } catch (err: any) {
             throw err;
         }
@@ -98,9 +101,16 @@ const Login = () => {
                                         handleChange={handleChange}
                                     />
                                 </div>
-                                {invalid?<div className="text-danger mt-3 mb-3">Invalid email or password</div>: null}
+                                {invalid ? (
+                                    <div className="text-danger mt-3 mb-3">
+                                        Invalid email or password
+                                    </div>
+                                ) : null}
                                 <div className="submit-button">
-                                    <ButtonActive text="LOG IN" disabled={disabled}/>
+                                    <ButtonActive
+                                        text="LOG IN"
+                                        disabled={disabled}
+                                    />
                                     <span className="d-block mt-3 ">OR</span>
                                     <GoogleLogin
                                         clientId="733293982707-ame53i3dj0oe9u4k6kfj4g0eeg9rcm2j.apps.googleusercontent.com"

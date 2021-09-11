@@ -23,7 +23,7 @@ const ToggleDropdown = (props: any) => {
     },[])
 
     return (
-        <div id={props.id} className={props.hide? "d-none": ""}>
+        <div id={props.id} className={props.hide? "d-none w-auto": " w-auto"}>
             <ClickAwayListener onClickAway={handleClickAway}>
                 <div style={props.style}>
                     <div

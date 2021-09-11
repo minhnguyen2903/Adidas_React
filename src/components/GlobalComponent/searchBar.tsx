@@ -22,14 +22,14 @@ const SearchBar = (props: any) => {
     };
 
     const searchSubmit = () => {
-        if(val !== "") {
+        if (val !== "") {
             window.location.href = `/search?q=${val}`;
         }
     };
 
     return (
         <Row
-            className="search-bar position-relative align-items-center me-3 me-lg-0"
+            className="search-bar position-relative align-items-center me-3 me-lg-0 w-auto"
             onKeyUp={(event: any) => {
                 if (event.key === "Enter") {
                     searchSubmit();
@@ -46,7 +46,7 @@ const SearchBar = (props: any) => {
                 onChange={handleState}
             />
             <div
-                className="position-absolute d-lg-flex d-none  align-items-center"
+                className="position-absolute d-lg-flex d-none align-items-center w-auto"
                 style={{ right: "20px" }}
                 onClick={() => {
                     searchSubmit();
@@ -55,7 +55,7 @@ const SearchBar = (props: any) => {
                 <Icon className="cursor-pointer gl-icon">search</Icon>
             </div>
             <div
-                className="position-absolute d-flex d-lg-none  align-items-center"
+                className="position-absolute d-flex d-lg-none align-items-center w-auto"
                 style={{ right: "20px" }}
                 onClick={() => {
                     handleAbsoluteSearchBar();

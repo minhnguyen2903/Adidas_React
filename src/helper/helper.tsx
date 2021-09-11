@@ -22,7 +22,7 @@ const Helper = {
                 dispatch(AddToSearchResult(element))
             })
             localStorage.setItem("searchResult", JSON.stringify(result));
-        }).then(callback())
+        }).then(callback)
         .catch((err: any) =>{console.log(err)});
     },
     saveToLocalStorage: (key:string, element: any) => {

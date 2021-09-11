@@ -240,7 +240,7 @@ const Footer = () => {
                                     </Link>
                                 </li>
                             </ul>
-                            <div>
+                            <div className="mt-2">
                                 <h3 className="text-uppercase text-700 text-medium">
                                     support
                                 </h3>

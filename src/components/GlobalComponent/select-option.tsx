@@ -153,7 +153,7 @@ export const SelectNumber = (props: any) => {
                         setIsOpen(!isOpen);
                     }}
                 >
-                    <span ref={spanRef}>{props.element.number}</span>
+                    <span ref={spanRef}>{props.element?.number}</span>
                     <Icon>expand_more</Icon>
                 </div>
                 <div

@@ -15,6 +15,8 @@ import AccountRegister from "./components/body/page/register";
 import "bootstrap/dist/css/bootstrap.css";
 import "./asserts/style/style.css";
 import "./App.css";
+import "./modifyBootstrap.css";
+
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {

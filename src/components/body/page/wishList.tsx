@@ -81,16 +81,16 @@ const WishListShow = () => {
       >
         <div className="col-sm-9 row">
           <div
-            className="product-img cursor-pointer"
+            className="product-img cursor-pointer w-auto"
             onClick={() => {
               viewDetail(item);
               window.location.href = `/search/${item.productId}`;
             }}
             style={{ height: "110px" }}
           >
-            <img src={item.image} alt="" className="h-100" />
+            <img src={item.image} alt="" className="h-100 w-auto" />
           </div>
-          <div className="product-detail ms-3">
+          <div className="product-detail ms-3 w-auto">
             <h3 className="product-name text-uppercase text-regular text-700">
               {item.title}
             </h3>
@@ -108,11 +108,11 @@ const WishListShow = () => {
         <div className="col-sm-3 mt-5 mt-sm-0 col-6">
           <div className="mb-3">In Stock</div>
           <div className="same-product row" style={{ height: "50px" }}>
-            <img src={item.image} alt="" className="h-100 me-2" />
-            <img src={item.image} alt="" className="h-100 me-2" />
+            <img src={item.image} alt="" className="h-100 me-2 w-auto" />
+            <img src={item.image} alt="" className="h-100 me-2 w-auto" />
           </div>
           <div className="select-size row justify-content-between mt-4">
-            <SelectOption size={size} handleSize={handleSize} />
+            <div className="w-auto"><SelectOption size={size} handleSize={handleSize} /></div>
             <SelectNumber
               number={number}
               handleNumber={handleNumber}

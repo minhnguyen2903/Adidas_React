@@ -184,25 +184,25 @@ const ProductInfo = (props: any) => {
                 </div>
                 <div className="detail-description mt-3 border-top border-bottom">
                     <div className="detail-nav row justify-content-center">
-                        <div className="detail-nav-item text-uppercase p-2 me-3 letter-spacing">
+                        <div className="detail-nav-item text-uppercase p-2 me-3 letter-spacing w-auto">
                             gallery
                         </div>
-                        <div className="detail-nav-item text-uppercase p-2 me-3 letter-spacing">
+                        <div className="detail-nav-item text-uppercase p-2 me-3 letter-spacing w-auto">
                             <a href="#hightlights">hightlights</a>
                         </div>
-                        <div className="detail-nav-item text-uppercase p-2 me-3 letter-spacing">
+                        <div className="detail-nav-item text-uppercase p-2 me-3 letter-spacing w-auto">
                             description
                         </div>
-                        <div className="detail-nav-item text-uppercase p-2 me-3 letter-spacing">
+                        <div className="detail-nav-item text-uppercase p-2 me-3 letter-spacing w-auto">
                             details
                         </div>
-                        <div className="detail-nav-item text-uppercase p-2 me-3 letter-spacing">
+                        <div className="detail-nav-item text-uppercase p-2 me-3 letter-spacing w-auto">
                             complete the look
                         </div>
-                        <div className="detail-nav-item text-uppercase p-2 me-3 letter-spacing">
+                        <div className="detail-nav-item text-uppercase p-2 me-3 letter-spacing w-auto">
                             how to style
                         </div>
-                        <div className="detail-nav-item text-uppercase p-2 me-3 letter-spacing">
+                        <div className="detail-nav-item text-uppercase p-2 me-3 letter-spacing w-auto">
                             reviews
                         </div>
                     </div>
@@ -391,10 +391,10 @@ const ProductInfo = (props: any) => {
                             </div>
                         </div>
                         <div className="row mt-5 justify-content-between">
-                            <ButtonActive
+                            <div className="w-auto"><ButtonActive
                                 text="add to bag"
                                 action={addToCart}
-                            />
+                            /></div>
                             <div
                                 className="border border-dark d-flex align-items-center justify-content-center"
                                 style={{ width: "50px", height: "50px" }}

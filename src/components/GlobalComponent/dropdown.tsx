@@ -104,7 +104,7 @@ const DropDown = (props: any) => {
     })
 
     const dispatch = useDispatch();
-    const renderDropdown = (obj: any) => {
+    const renderDropdown = (obj: any, category: any) => {
         const renderList = obj.map((item: any) => {
             const index = obj.indexOf(item);
             if(index === 0) {
@@ -115,7 +115,7 @@ const DropDown = (props: any) => {
                             {item.items.map((element: any) => {
                                 const elementIndex = item.items.indexOf(element);
                                 return (
-                                    <li key={elementIndex} className="text-capitalize mb-2 text-small" style={{lineHeight: "16px"}} onClick = {() => {Helper.UpdateSearchResult(dispatch, `men ${element}`)}}>{element}</li>
+                                    <li key={elementIndex} className="text-capitalize mb-2 text-small" style={{lineHeight: "16px"}} onClick = {() => {window.location.href=`/search?q=${category} ${element}}`}}>{element}</li>
                                 )
                             })}
                         </ul>
@@ -129,7 +129,7 @@ const DropDown = (props: any) => {
                             {item.items.map((element: any) => {
                                 const elementIndex = item.items.indexOf(element);
                                 return (
-                                    <li key={elementIndex} className="text-capitalize mb-2 text-small" style={{lineHeight: "16px"}} onClick = {() => {Helper.UpdateSearchResult(dispatch, `men ${element}`)}} >{element}</li>
+                                    <li key={elementIndex} className="text-capitalize mb-2 text-small" style={{lineHeight: "16px"}} onClick = {() => {window.location.href=`/search?q=${category} ${element}`}} >{element}</li>
                                 )
                             })}
                         </ul>
@@ -166,15 +166,15 @@ const DropDown = (props: any) => {
         switch(val) {
             case "men":
                 return (
-                    renderDropdown(list.men)
+                    renderDropdown(list.men, "men")
                 )
             case "women":
                 return (
-                    renderDropdown(list.women)
+                    renderDropdown(list.women, "women")
                 )
             case "kids":
                 return (
-                    renderDropdown(list.kids)
+                    renderDropdown(list.kids, "kids")
                 )
         }
     }
