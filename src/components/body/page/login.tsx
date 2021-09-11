@@ -2,7 +2,7 @@ import { ButtonActive } from "../../GlobalComponent/button";
 import Icon from "@material-ui/core/Icon";
 import { useState } from "react";
 import { GoogleLogin } from "react-google-login";
-import FacebookLogin from "react-facebook-login";
+import ReactFacebookLogin from "react-facebook-login";
 import FacebookLogo from "../../../asserts/img/icon/facebook-circular-logo.svg";
 import { useDispatch } from "react-redux";
 import { SignIn } from "../../../redux/action/action";
@@ -110,7 +110,7 @@ const Login = () => {
                                         cookiePolicy={"single_host_origin"}
                                         className="login_styled"
                                     />
-                                    <FacebookLogin
+                                    <ReactFacebookLogin
                                         appId="874709023460058"
                                         autoLoad={false}
                                         fields="name,email,picture"
