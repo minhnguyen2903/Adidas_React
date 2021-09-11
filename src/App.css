@@ -1,13 +1,4 @@
 @font-face {
-    font-family: 'Material Icons';
-    font-style: normal;
-    font-weight: 400;
-    src: url(https://example.com/MaterialIcons-Regular.eot);
-    /* For IE6-8 */
-    src: local('Material Icons'), local('MaterialIcons-Regular'), url(https://example.com/MaterialIcons-Regular.woff2) format('woff2'), url(https://example.com/MaterialIcons-Regular.woff) format('woff'), url(https://example.com/MaterialIcons-Regular.ttf) format('truetype');
-}
-
-@font-face {
     font-family: "DIN PRO";
     src: url("./asserts/font/otf/D-DIN-PRO-400-Regular.otf") format("truetype");
     font-weight: 400;
@@ -37,7 +28,8 @@
 
 @font-face {
     font-family: "DIN PRO";
-    src: url("./asserts/font/otf/D-DIN-PRO-800-ExtraBold.otf") format("truetype");
+    src: url("./asserts/font/otf/D-DIN-PRO-800-ExtraBold.otf")
+        format("truetype");
     font-weight: 800;
     font-style: normal;
 }
@@ -50,7 +42,7 @@
 }
 
 * {
-    font-family: "DIN Pro", 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: "DIN Pro", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     font-size: 16px;
     font-weight: 400;
     list-style-type: none;
@@ -73,13 +65,13 @@ button[disabled] {
     background: rgb(77, 77, 77);
 }
 
-button:disabled:active ,
+button:disabled:active,
 button[disabled]:active {
     transform: none !important;
 }
 
 body {
-    background: white
+    background: white;
 }
 
 @media only screen and (max-width: 1200px) {

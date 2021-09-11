@@ -1,7 +1,6 @@
-import React, { useRef, useState } from "react";
+import  { useState } from "react";
 import { ClickAwayListener } from "@material-ui/core";
 import Icon from "@material-ui/core/Icon";
-import { useEffect } from "react";
 
 export const SelectOption = (props: any) => {
     const [selectedOption, setSelectedOption] = useState("Select Size");
@@ -110,7 +109,6 @@ export const SelectOption = (props: any) => {
 
 export const SelectNumber = (props: any) => {
     const [isOpen, setIsOpen] = useState(false);
-    const spanRef = useRef<HTMLSpanElement>(null);
     const handleClickAway = () => {
         setIsOpen(false);
     };
@@ -153,7 +151,7 @@ export const SelectNumber = (props: any) => {
                         setIsOpen(!isOpen);
                     }}
                 >
-                    <span ref={spanRef}>{props.element?.number}</span>
+                    <span>{props.element?.number}</span>
                     <Icon>expand_more</Icon>
                 </div>
                 <div

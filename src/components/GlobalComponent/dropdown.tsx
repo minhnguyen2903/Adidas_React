@@ -1,8 +1,6 @@
 import { useState } from "react";
 import {Col } from "react-bootstrap";
-import Helper from "../../helper/helper";
 
-import { useDispatch } from "react-redux";
 const DropDown = (props: any) => {
     const [list, setList] = useState({
         men: [
@@ -103,7 +101,6 @@ const DropDown = (props: any) => {
         ]
     })
 
-    const dispatch = useDispatch();
     const renderDropdown = (obj: any, category: any) => {
         const renderList = obj.map((item: any) => {
             const index = obj.indexOf(item);
