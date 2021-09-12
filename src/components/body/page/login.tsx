@@ -109,13 +109,13 @@ const Login = () => {
                                     />
                                     <span className="d-block mt-3 ">OR</span>
                                     <GoogleLogin
-        clientId="733293982707-ame53i3dj0oe9u4k6kfj4g0eeg9rcm2j.apps.googleusercontent.com"
-        buttonText="GOOGLE"
-        onSuccess={responseGoogle}
-        onFailure={responseGoogle}
-        cookiePolicy={"single_host_origin"}
-        className="login_styled"
-    />
+                                        clientId="733293982707-ame53i3dj0oe9u4k6kfj4g0eeg9rcm2j.apps.googleusercontent.com"
+                                        buttonText="GOOGLE"
+                                        onSuccess={responseGoogle}
+                                        onFailure={responseGoogle}
+                                        cookiePolicy={"single_host_origin"}
+                                        className="login_styled"
+                                    />
                                     <ReactFacebookLogin
                                         appId="874709023460058"
                                         autoLoad={false}
