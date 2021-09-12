@@ -1,6 +1,7 @@
 import { ButtonActive } from "../../GlobalComponent/button";
 import Icon from "@material-ui/core/Icon";
 import { useState } from "react";
+import GoogleLogin from "react-google-login";
 import ReactFacebookLogin from "react-facebook-login";
 import FacebookLogo from "../../../asserts/img/icon/facebook-circular-logo.svg";
 import { useDispatch } from "react-redux";
@@ -15,6 +16,14 @@ const Login = () => {
     const [disabled, setDisabled] = useState(false);
     const [invalid, setInvalid] = useState(false);
     const dispatch = useDispatch();
+    const responseGoogle = (response: any) => {
+        if (response) {
+            sessionStorage.setItem("Google_account", JSON.stringify(response));
+            window.location.href = "/";
+        } else {
+            sessionStorage.removeItem("Google_account");
+        }
+    };
 
     const responseFacebook = (response: any) => {
         if (response.status !== "unknown") {
@@ -99,7 +108,14 @@ const Login = () => {
                                         disabled={disabled}
                                     />
                                     <span className="d-block mt-3 ">OR</span>
-
+                                    <GoogleLogin
+        clientId="733293982707-ame53i3dj0oe9u4k6kfj4g0eeg9rcm2j.apps.googleusercontent.com"
+        buttonText="GOOGLE"
+        onSuccess={responseGoogle}
+        onFailure={responseGoogle}
+        cookiePolicy={"single_host_origin"}
+        className="login_styled"
+    />
                                     <ReactFacebookLogin
                                         appId="874709023460058"
                                         autoLoad={false}
