@@ -1,7 +1,6 @@
 import Icon from "@material-ui/core/Icon";
-
+import Helper from "../../helper/helper";
 const RenderSelectedFilter = (props: any) => {
-
     const removeFilter = (element: any) => {
         const locate = window.location.href;
         const filter = [`&gender=${element}`, `?gender=${element}`,
@@ -15,7 +14,7 @@ const RenderSelectedFilter = (props: any) => {
 
         filter.forEach((value: string) => {
             if(locate.includes(value)) {
-                window.location.href = locate.replace(value, "");
+                window.location.href = locate.replace(value, "").replace("search&", "search?");
             }
         })
     }

@@ -67,9 +67,16 @@
     width: fit-content;
 }
 
+.text-bg--border-dark {
+    background: #000;
+    color: white;
+    border-color: black !important;
+}
+
 .text-hover-bg-dark:hover {
     background: #000;
     color: white;
+    border-color: black !important;
 }
 
 .cursor-pointer {
@@ -380,4 +387,35 @@ header {
 
 .button-active-scale:active {
     transform: scale(0.95);
+}
+
+.loading-card {
+    animation: mymove 4s infinite;
+}
+
+@keyframes mymove {
+    0%   {background: #ebedee;}
+    50%  {background: #dddcdc;}
+    100% {background: #ebedee;}
+  }
+
+.pop-up {
+    position: relative;
+    box-shadow: 0px 0px 30px 10px rgba(0,0,0,0.1);
+}
+
+.pop-up::after {
+    font-family: "Material Icons" !important;
+    position: absolute;
+    cursor: pointer;
+    text-transform: lowercase !important;
+    content: "close" !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    top: 3px;
+    right: 3px;
+
 }

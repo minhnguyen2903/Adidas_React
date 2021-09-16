@@ -41,6 +41,15 @@
     font-style: normal;
 }
 
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 5px;
+}
+
 * {
     font-family: "DIN Pro", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     font-size: 16px;

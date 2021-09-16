@@ -6,32 +6,57 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Helper from "../../../helper/helper";
 import RenderSelectedFilter from "../renderSelected";
-import Spinner from "../../../asserts/img/Spinner-1s-200px.gif"
+import Spinner from "../../../asserts/img/Spinner-1s-200px.gif";
+import PagePagination from "../../GlobalComponent/pagination";
 const Searchresult = () => {
+    window.scrollTo(0, 0);
     const products = useSelector((state: any) => state.searchResult.products);
     const [filter, setFilter] = useState([""]);
     const [fetchDone, setFetchDone] = useState(false);
     const searchKey = window.location.search;
     const dispatch = useDispatch();
+    const objQuery = Helper.searchToObject()
 
     const searchResultFor = (key: string) => {
-        const splitKey = key.split("");
+        console.log(objQuery)
+        let result = "";
+        Object.keys(objQuery).forEach((element: any) => {
+            if(result === "") {
+                result = objQuery[element]
+            } else {
+                if(element === "q") {
+                    result = `${objQuery[element]} + ${result}`
+                } else {
+                    result += ` + ${objQuery[element]}`
+                }
+            }
+
+        })
+/*         const splitKey = key.split("");
         let indexEnd;
         if (splitKey.indexOf("&") !== -1) {
             indexEnd = splitKey.indexOf("&");
         } else {
             indexEnd = splitKey.length;
         }
-
-        return key.substring(3, indexEnd).replace("%20", " ");
+        return key.substring(3, indexEnd).replace("%20", " "); */
+        return result;
     };
 
     const filterText = () => {
-        let a = window.location.search.split("");
+        let rawQuery = window.location.search;
+        if(rawQuery.includes("?startAt")) {
+            rawQuery = rawQuery.replace(`?startAt=${objQuery.startAt}`, "")
+        }
+        if(rawQuery.includes("&startAt")) {
+            rawQuery = rawQuery.replace(`&startAt=${objQuery.startAt}`, "")
+        }
+        console.log(rawQuery)
+        let a = rawQuery.split("");
         const b: any = [];
         const c: any = [];
         a.forEach((element: string, index: number) => {
-            if (element === "=" && a[index-1] !== "q") {
+            if (element === "=" && a[index - 1] !== "q") {
                 b.push(index);
             }
             if (element === "&") {
@@ -63,13 +88,14 @@ const Searchresult = () => {
         return isValid;
     };
     const handleFetch = () => {
-        setFetchDone(true)
-    }
+        setFetchDone(true);
+    };
     useEffect(() => {
         filterText();
         Helper.UpdateSearchResult(dispatch, searchKey, handleFetch);
         window.scrollTo(0, 0);
     }, [filter]);
+
     return (
         <main className="pb-5 pt-4">
             <div className="row w-100 justify-content-center">
@@ -88,7 +114,7 @@ const Searchresult = () => {
                                 className="text-title text-uppercase"
                                 style={{ fontStyle: "italic" }}
                             >
-                                {searchKey.includes("?q")
+                                {searchKey.includes("?")
                                     ? searchResultFor(searchKey)
                                     : "all products"}
                             </h3>
@@ -205,7 +231,16 @@ const Searchresult = () => {
                     </div>
                     <div className="search-result w-100">
                         <div className="product-grid row pb-5">
-                            {fetchDone?<RenderSearchResult /> : <div className="w-100 d-flex justify-content-center"><img src={Spinner} alt="" height="120px" /></div>}
+                            {fetchDone ? (
+                                <div>
+                                    <RenderSearchResult/>
+                                    <PagePagination/>
+                                </div>
+                            ) : (
+                                <div className="w-100 d-flex justify-content-center">
+                                    <img src={Spinner} alt="" height="120px" />
+                                </div>
+                            )}
                         </div>
                     </div>
                 </div>

@@ -1,16 +1,23 @@
 import { useEffect } from "react";
 import { useState } from "react";
-
+import Helper from "../../helper/helper";
 export const MyCheckBox = (props: any) => {
     const [isChecked, setIsChecked] = useState(false);
+    const objQuery = Helper.searchToObject()
     const toogleChecked = (e: any) => {
         setIsChecked(!isChecked);
-        const query = window.location.search;
+        let query = window.location.search;
+        if(query.includes("?startAt")) {
+            query = query.replace(`?startAt=${objQuery.startAt}`, "")
+        }
+        if(query.includes("&startAt")) {
+            query = query.replace(`&startAt=${objQuery.startAt}`, "")
+        }
         if (query !== "" && !window.location.search.replaceAll("%20", " ").includes(props.name)) {
-            window.location.href = `/search${query}&${props.category.toLowerCase()}=${e.target.name}`;
+            window.location.href = `/search${query}&${props.category.toLowerCase()}=${e.target.name}${objQuery.startAt?"&startAt="+objQuery.startAt: ""}`;
         } 
         else if (query === "" && !window.location.search.replaceAll("%20", " ").includes(props.name)) {
-            window.location.href = `/search?${props.category.toLowerCase()}=${e.target.name}`;
+            window.location.href = `/search?${props.category.toLowerCase()}=${e.target.name}${objQuery.startAt?"&startAt="+objQuery.startAt: ""}`;
         }
     };
 

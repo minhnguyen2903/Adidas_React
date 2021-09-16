@@ -17,7 +17,7 @@ SwiperCore.use([Navigation, Pagination]);
 
 export function Slider(props: any) {
     const isTablet = useMediaQuery({ query: "(max-width: 992px)" });
-    const isMobile = useMediaQuery({ query: "(max-width: 768px)" });
+    const isMobile = useMediaQuery({ query: "(max-width: 425px)" });
     return (
         <div className="row w-100 justify-content-center">
             <div className="content-container col-lg-11 p-2 p-lg-5 overflow-hidden">
@@ -28,7 +28,7 @@ export function Slider(props: any) {
                 </div>
                 <div className="row w-100">
                     <Swiper
-                        slidesPerView={isMobile ? 1.2 : isTablet ? 2.7 : 4.7}
+                        slidesPerView={isMobile ? 1.7 : isTablet ? 2.7 : 4.7}
                         slidesPerGroup={isMobile ? 1 : isTablet ? 2 : 4}
                         loop={false}
                         spaceBetween={10}
@@ -115,11 +115,11 @@ export function Slider(props: any) {
 
 export function ProductSlide(props: any) {
     const isTablet = useMediaQuery({ query: "(max-width: 992px)" });
-    const isMobile = useMediaQuery({ query: "(max-width: 768px)" });
+    const isMobile = useMediaQuery({ query: "(max-width: 425px)" });
     const renderCard = props.state.map((item: any) => {
         const mapIndex = props.state.indexOf(item);
         return (
-            <SwiperSlide key={mapIndex} style={{ width: "276px" }}>
+            <SwiperSlide key={mapIndex}>
                 <CardProduct state={item} />
             </SwiperSlide>
         );
@@ -135,7 +135,7 @@ export function ProductSlide(props: any) {
                 </div>
                 <div className="row w-100">
                     <Swiper
-                        slidesPerView={isMobile ? 1.2 : isTablet ? 2.7 : 4.7}
+                        slidesPerView={isMobile ? 1.7 : isTablet ? 2.7 : 4.7}
                         slidesPerGroup={isMobile ? 1 : isTablet ? 2 : 4}
                         loop={false}
                         spaceBetween={10}
@@ -145,7 +145,7 @@ export function ProductSlide(props: any) {
                         className="productSwiper pb-5 w-100"
                     >
                         {renderCard}
-                        <SwiperSlide style={{ width: "276px", minHeight: "399px" }}>
+                        <SwiperSlide className={`${props.state?"": "w-100"}`}>
                             <div className="d-flex align-items-center justify-content-center h-100">
                                 <Link
                                     className="text-capitalize cursor-pointer"

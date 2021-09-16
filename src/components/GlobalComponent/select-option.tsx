@@ -1,4 +1,4 @@
-import  { useState } from "react";
+import { useEffect, useState } from "react";
 import { ClickAwayListener } from "@material-ui/core";
 import Icon from "@material-ui/core/Icon";
 
@@ -115,6 +115,7 @@ export const SelectNumber = (props: any) => {
 
     const putToLocalStorage = (element: any, number: number) => {
         if (props.type === "cart") {
+            props.handleNumber(number);
             const getFromLocal = JSON.parse(
                 String(localStorage.getItem("cart"))
             );
@@ -151,7 +152,7 @@ export const SelectNumber = (props: any) => {
                         setIsOpen(!isOpen);
                     }}
                 >
-                    <span>{props.element?.number}</span>
+                    <span>{props.element?.number || "Number"}</span>
                     <Icon>expand_more</Icon>
                 </div>
                 <div
@@ -193,5 +194,46 @@ export const SelectNumber = (props: any) => {
                 </div>
             </div>
         </ClickAwayListener>
+    );
+};
+
+export const SelectLocation = (props: any) => {
+    const [isSelect, setIsSelect] = useState(false);
+    const [rerender, setRerender] = useState(props.current);
+    const handleChange = (e: any) => {
+        setIsSelect(true);
+        props.event(e.target.name, e.target.value);
+    };
+    const renderOption = props.values?.map((element: any, index: number) => {
+        return (
+            <option
+                value={element._name}
+                key={index}
+                className="text-capitalize"
+            >
+                {element._name}
+            </option>
+        );
+    });
+    useEffect(() => {
+        console.log(props.current)
+    }, [rerender])
+    return (
+        <div>
+            <select
+                name={props.name}
+                id="province"
+                defaultValue=""
+                value={props.curent}
+                style={{ height: "46px" }}
+                className="outline-0 w-100 border border-dark p-2 mt-4 mb-4 bg-white"
+                onChange={handleChange}
+            >
+                {props.curent!=="" ? (
+                    <option value="">Select {props.name}</option>
+                ) : null}
+                {renderOption}
+            </select>
+        </div>
     );
 };

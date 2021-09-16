@@ -30,9 +30,10 @@ const ProductInfo = (props: any) => {
         subtitle: "Men Running",
         badge_text: "",
         badge_style: "new",
-        hoverImage: "https://assets.adidas.com/images/w_383,h_383,f_auto,q_auto:sensitive,fl_lossy,c_fill,g_auto/6d63c7ec33434598b678ad5600fe1817_9366/adidas-4dfwd-shoes.jpg",
+        hoverImage:
+            "https://assets.adidas.com/images/w_383,h_383,f_auto,q_auto:sensitive,fl_lossy,c_fill,g_auto/6d63c7ec33434598b678ad5600fe1817_9366/adidas-4dfwd-shoes.jpg",
         size: "",
-        number: 0
+        number: 0,
     });
 
     const dispatch = useDispatch();
@@ -125,11 +126,11 @@ const ProductInfo = (props: any) => {
     useEffect(() => {
         AOS.init();
         window.scrollTo(0, 0);
-        GetData(`${process.env.REACT_APP_SERVER_URL}/api/detail/${productId}`).then(
-            (res: any) => {
-                setProductDetail(res[0]);
-            }
-        );
+        GetData(
+            `${process.env.REACT_APP_SERVER_URL}/api/detail/${productId}`
+        ).then((res: any) => {
+            setProductDetail(res[0]);
+        });
     }, []);
 
     return (
@@ -182,6 +183,69 @@ const ProductInfo = (props: any) => {
                         </div>
                     </div>
                 </div>
+                <div className="col-lg-4 pe-5 ps-5 pt-4 pb-4 position-relative d-lg-none">
+                    <div className="position-sticky" style={{ top: "1em" }}>
+                        <div className="product-category text-400">
+                            {productDetail.subtitle}
+                        </div>
+                        <h2 className="product-name font-italic text-uppercase">
+                            {productDetail.title}
+                        </h2>
+                        <div className="product-color">
+                            <p>{productDetail.color}</p>
+                        </div>
+                        <div className="product-price">
+                            <span className="text-700 text-medium">
+                                {Helper.CountNumber([productDetail.price])}₫
+                            </span>
+                        </div>
+                        <div className="product-size mt-3">
+                            <div className="select-size text-700 mb-2">
+                                Select size
+                            </div>
+                            <div className="row">{renderSize}</div>
+                            <p className="left-in-stoke text-danger mt-3">
+                                {alert
+                                    ? "Please select size"
+                                    : " Only 5 left in stoke"}
+                            </p>
+                            <div className="row justify-content-between">
+                                <div className="w-auto">
+                                    <span className="d-flex align-items-center cursor-pointer bg-hover-dark text-hover-underline">
+                                        <Icon className="me-2">straighten</Icon>{" "}
+                                        Size guidance
+                                    </span>
+                                </div>
+                                <div className="w-auto">
+                                    <span className="d-flex justify-content-end align-items-center cursor-pointer bg-hover-dark text-hover-underline">
+                                        <Icon className="me-2">
+                                            mail_outline
+                                        </Icon>
+                                        Size out of stock?
+                                    </span>
+                                </div>
+                            </div>
+                            <div className="row mt-5 justify-content-between">
+                                <div className="w-auto">
+                                    <ButtonActive
+                                        text="add to bag"
+                                        action={addToCart}
+                                    />
+                                </div>
+                                <div
+                                    className="border border-dark d-flex align-items-center justify-content-center"
+                                    style={{ width: "50px", height: "50px" }}
+                                >
+                                    <Favorite
+                                        state={productDetail}
+                                        style={{ fontSize: "2em" }}
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div className="detail-description mt-3 border-top border-bottom">
                     <div className="detail-nav row justify-content-center">
                         <div className="detail-nav-item text-uppercase p-2 me-3 letter-spacing w-auto">
@@ -191,7 +255,7 @@ const ProductInfo = (props: any) => {
                             <a href="#hightlights">hightlights</a>
                         </div>
                         <div className="detail-nav-item text-uppercase p-2 me-3 letter-spacing w-auto">
-                            description
+                            <a href="#description">description</a>
                         </div>
                         <div className="detail-nav-item text-uppercase p-2 me-3 letter-spacing w-auto">
                             details
@@ -212,7 +276,7 @@ const ProductInfo = (props: any) => {
                         hightlights
                     </h2>
                     <div className="row">
-                        <div className="col-12 p-3  col-md-3">
+                        <div className="col-12 pe-md-2 pe-sm-2  col-md-3 py-3 col-sm-6">
                             <div className="hightlight-img">
                                 <img
                                     className="w-100"
@@ -233,7 +297,7 @@ const ProductInfo = (props: any) => {
                                 polyester.
                             </div>
                         </div>
-                        <div className="col-12 p-3  col-md-3">
+                        <div className="col-12 pe-md-2 ps-md-2 ps-sm-2 col-md-3 py-3 col-sm-6">
                             <div className="hightlight-img">
                                 <img
                                     className="w-100"
@@ -253,7 +317,7 @@ const ProductInfo = (props: any) => {
                                 explosive feel of Lightstrike.
                             </div>
                         </div>
-                        <div className="col-12 p-3  col-md-3">
+                        <div className="col-12 pe-md-2 ps-md-2 pe-sm-2  col-md-3 py-3 col-sm-6">
                             <div className="hightlight-img">
                                 <img
                                     className="w-100"
@@ -273,7 +337,7 @@ const ProductInfo = (props: any) => {
                                 fit.
                             </div>
                         </div>
-                        <div className="col-12 p-3  col-md-3">
+                        <div className="col-12 ps-md-2  col-md-3 ps-sm-2 py-3 col-sm-6">
                             <div className="hightlight-img">
                                 <img
                                     className="w-100"
@@ -352,9 +416,11 @@ const ProductInfo = (props: any) => {
                     </div>
                 </div>
             </div>
-            <div className="col-lg-4 pe-5 ps-5 pt-4 pb-4 position-relative">
+            <div className="col-lg-4 pe-5 ps-5 pt-4 pb-4 position-relative d-none d-lg-block">
                 <div className="position-sticky" style={{ top: "1em" }}>
-                    <div className="product-category text-400">Running</div>
+                    <div className="product-category text-400">
+                        {productDetail.subtitle}
+                    </div>
                     <h2 className="product-name font-italic text-uppercase">
                         {productDetail.title}
                     </h2>
@@ -377,13 +443,13 @@ const ProductInfo = (props: any) => {
                                 : " Only 5 left in stoke"}
                         </p>
                         <div className="row justify-content-between">
-                            <div>
+                            <div className="w-auto">
                                 <span className="d-flex align-items-center cursor-pointer bg-hover-dark text-hover-underline">
                                     <Icon className="me-2">straighten</Icon>{" "}
                                     Size guidance
                                 </span>
                             </div>
-                            <div>
+                            <div className="w-auto">
                                 <span className="d-flex justify-content-end align-items-center cursor-pointer bg-hover-dark text-hover-underline">
                                     <Icon className="me-2">mail_outline</Icon>
                                     Size out of stock?
@@ -391,10 +457,12 @@ const ProductInfo = (props: any) => {
                             </div>
                         </div>
                         <div className="row mt-5 justify-content-between">
-                            <div className="w-auto"><ButtonActive
-                                text="add to bag"
-                                action={addToCart}
-                            /></div>
+                            <div className="w-auto">
+                                <ButtonActive
+                                    text="add to bag"
+                                    action={addToCart}
+                                />
+                            </div>
                             <div
                                 className="border border-dark d-flex align-items-center justify-content-center"
                                 style={{ width: "50px", height: "50px" }}

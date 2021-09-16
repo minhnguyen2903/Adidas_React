@@ -18,11 +18,11 @@ const AbsoluteNav = (props: any) => {
     >
       <div className="absolute-nav-header row w-100 border-bottom d-flex justify-content-between align-items-center p-3">
         <div></div>
-        <div className="h-100">
+        <div className="h-100 w-auto">
           <img src={logo} alt="" width="70" className="h-100" />
         </div>
         <div
-          className="d-flex justify-content-center align-items-end cursor-pointer"
+          className="w-auto d-flex justify-content-center align-items-end cursor-pointer"
           onClick={() => {
             props.handleShow(false);
           }}

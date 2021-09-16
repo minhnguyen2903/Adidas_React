@@ -22,10 +22,15 @@ export const VideoCard = (props: any) => {
                     )}
                 </div>
                 <div className="card-content">
-                    <h3 className="text-uppercase text-700 text-regular overflow-hidden mt-2" style={{height: "40px"}}>
+                    <h3
+                        className="text-uppercase text-700 text-regular overflow-hidden mt-2"
+                        style={{ height: "40px" }}
+                    >
                         {props.productName}
                     </h3>
-                    <p className="overflow-hidden" style={{height: "72px"}}>{props.description}</p>
+                    <p className="overflow-hidden" style={{ height: "72px" }}>
+                        {props.description}
+                    </p>
                     {props.children ? (
                         props.children
                     ) : (
@@ -45,31 +50,52 @@ export const VideoCard = (props: any) => {
 
 export const CardProduct = (props: any) => {
     const divRef = useRef<HTMLDivElement>(null);
-    const [style, setStyle] = useState({
-        background: "#EBEEEF",
-        height: ""
-    })
+    const imgRef = useRef<HTMLImageElement>(null);
+    const [isLoaded, setIsLoaded] = useState(false);
+    const [divHeight, setDivHeight] = useState(divRef.current?.offsetWidth);
+    const handleImageLoaded = () => {
+        setIsLoaded(true);
+    };
     useEffect(() => {
-        setStyle({...style, height: `${divRef.current?.offsetWidth}px`})
-    }, [divRef])
+        setDivHeight(divRef.current?.offsetWidth);
+    }, []);
     return (
-        <div className="card-padding cursor-pointer position-relative">
+        <div className="card-padding cursor-pointer position-relative w-100">
             {props.wishListShow ? (
                 <div
                     className="wish-list position-absolute"
                     style={{ top: "1em", right: "1em" }}
                 >
-                <Favorite state={props.state} style={{fontSize: "1.2em", opacity: "0.6"}}/>
+                    <Favorite
+                        state={props.state}
+                        style={{ fontSize: "1.2em", opacity: "0.6" }}
+                    />
                 </div>
             ) : (
                 ""
             )}
             <Link to={`/search/${props.state.productId}`}>
-                <div
-                    className={`card-body p-0 ${styles.card_hover}`}
-                >
-                    <div className="card-product position-relative">
-                        <div ref={divRef} className="w-100" style={style}><img src={props.state.image} className="w-100" alt=""/></div>
+                <div className={`card-body p-0  ${styles.card_hover}`}>
+                    <div
+                        ref={divRef}
+                        className="card-product position-relative"
+                    >
+                        <div
+                            className="w-100 loading-card"
+                            style={{
+                                height: `${
+                                    isLoaded ? `auto` : `${divHeight}px`
+                                }`,
+                            }}
+                        >
+                            <img
+                                ref={imgRef}
+                                src={props.state.image}
+                                className="w-100"
+                                alt=""
+                                onLoad={handleImageLoaded}
+                            />
+                        </div>
                         <div className={styles.card_hover_price}>
                             <span className="bg-white p-1">
                                 {Helper.CountNumber([props.state.price])}đ
@@ -77,11 +103,21 @@ export const CardProduct = (props: any) => {
                         </div>
                     </div>
                     <div className="card-content p-2 pb-4">
-                        <div className="product-name text-capitalize mt-2">
+                        <div
+                            className="product-name text-capitalize mt-2 overflow-hidden"
+                            style={{ height: "1.5em" }}
+                        >
                             {props.state.title}
                         </div>
-                        <p className="p-0 m-0">{props.state.category}</p>
-                        <p className="text-small p-0 m-0">New</p>
+                        <p className="p-0 m-0" style={{ height: "1.5em" }}>
+                            {props.state.category}
+                        </p>
+                        <p
+                            className="text-small p-0 m-0"
+                            style={{ height: "1.5em" }}
+                        >
+                            New
+                        </p>
                     </div>
                 </div>
             </Link>

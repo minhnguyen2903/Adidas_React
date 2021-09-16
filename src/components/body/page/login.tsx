@@ -19,6 +19,10 @@ const Login = () => {
     const responseGoogle = (response: any) => {
         if (response) {
             sessionStorage.setItem("Google_account", JSON.stringify(response));
+            if(response.error) {
+                console.log(response.error);
+                return
+            }
             window.location.href = "/";
         } else {
             sessionStorage.removeItem("Google_account");

@@ -15,8 +15,8 @@ import {
 const WishListShow = () => {
   const products = useSelector((state: any) => state.wishList.products);
   const dispatch = useDispatch();
-  const [size, setSize] = useState("3.5 UK");
-  const [number, setNumber] = useState("1");
+  const [size, setSize] = useState("");
+  const [number, setNumber] = useState(0);
 
   const handleSize = (size: any) => {
     setSize(size);
@@ -57,8 +57,8 @@ const WishListShow = () => {
   };
 
   const addToCart = (element: any) => {
-    if (filterAction(element) === false) {
-      element.number = parseInt(number);
+    if (filterAction(element) === false && number !== 0 && size!=="") {
+      element.number = number;
       element.size = size;
       dispatch(AddToCart(element));
       Helper.saveToLocalStorage("cart", element);
@@ -114,7 +114,7 @@ const WishListShow = () => {
           <div className="select-size row justify-content-between mt-4">
             <div className="w-auto"><SelectOption size={size} handleSize={handleSize} /></div>
             <SelectNumber
-              number={number}
+              number={item.number || null}
               handleNumber={handleNumber}
               element={item}
               type="wishList"
@@ -134,9 +134,6 @@ const WishListShow = () => {
       </div>
     );
   });
-
-  useEffect(() => {
-  }, [number, size]);
 
   return (
     <main>
