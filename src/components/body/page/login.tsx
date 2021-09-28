@@ -18,14 +18,14 @@ const Login = () => {
     const dispatch = useDispatch();
     const responseGoogle = (response: any) => {
         if (response) {
-            sessionStorage.setItem("Google_account", JSON.stringify(response));
+            sessionStorage.setItem("_user", JSON.stringify(response));
             if(response.error) {
-                console.log(response.error);
+                sessionStorage.removeItem("_user");
                 return
             }
             window.location.href = "/";
         } else {
-            sessionStorage.removeItem("Google_account");
+            sessionStorage.removeItem("_user");
         }
     };
 
@@ -33,12 +33,12 @@ const Login = () => {
         if (response.status !== "unknown") {
             dispatch(SignIn(true));
             sessionStorage.setItem(
-                "Facebook_account",
+                "_user",
                 JSON.stringify(response)
             );
             window.location.href = "/";
         } else {
-            sessionStorage.removeItem("Facebook_account");
+            sessionStorage.removeItem("_user");
         }
     };
 

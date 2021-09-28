@@ -5,7 +5,7 @@ import { RemoveFromCart } from "../../../redux/action/action";
 import Helper from "../../../helper/helper";
 import { SelectNumber } from "../../GlobalComponent/select-option";
 import { Favorite } from "../../GlobalComponent/favorite";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 const Cart = () => {
     const products = useSelector((state: any) => state.cart.products);
     const [number, setNumber] = useState(1);

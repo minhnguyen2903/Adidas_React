@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useSelector } from "react-redux";
 import Icon from "@material-ui/core/Icon";
 import Helper from "../../helper/helper";
@@ -18,7 +18,6 @@ const PagePagination = (props: any) => {
         }
     }
     const hrefEvent = (value: any) => {
-        console.log(value);
         let splitQuery = window.location.href.split("&startAt");
         let rawQuery = splitQuery[0]
         if(splitQuery[0].includes("?startAt")) {

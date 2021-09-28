@@ -58,9 +58,11 @@ const BodyComponent = () => {
                         </div>
                     </div>
                 </div>
+          
             </div>
         </main>
-    );
+   
+   );
 };
 
 export default BodyComponent;

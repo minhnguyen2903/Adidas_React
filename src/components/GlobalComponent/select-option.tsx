@@ -198,12 +198,17 @@ export const SelectNumber = (props: any) => {
 };
 
 export const SelectLocation = (props: any) => {
-    const [isSelect, setIsSelect] = useState(false);
-    const [rerender, setRerender] = useState(props.current);
+    const [warning, setWarning] = useState(false);
     const handleChange = (e: any) => {
-        setIsSelect(true);
         props.event(e.target.name, e.target.value);
     };
+    useEffect(() => {
+        if(props.isValid === false && props.current === "") {
+            setWarning(true)
+        } else {
+            setWarning(false)
+        }
+    }, [props.isValid, props.current])
     const renderOption = props.values?.map((element: any, index: number) => {
         return (
             <option
@@ -215,18 +220,15 @@ export const SelectLocation = (props: any) => {
             </option>
         );
     });
-    useEffect(() => {
-        console.log(props.current)
-    }, [rerender])
     return (
-        <div>
+        <div className="mt-4 mb-4">
             <select
                 name={props.name}
                 id="province"
                 defaultValue=""
                 value={props.curent}
                 style={{ height: "46px" }}
-                className="outline-0 w-100 border border-dark p-2 mt-4 mb-4 bg-white"
+                className="outline-0 w-100 border border-dark p-2 bg-white"
                 onChange={handleChange}
             >
                 {props.curent!=="" ? (
@@ -234,6 +236,8 @@ export const SelectLocation = (props: any) => {
                 ) : null}
                 {renderOption}
             </select>
+            {warning?<p className="m-0 p-0 ms-2 mt-1" style={{color: "red"}}>Required</p>: null}
+
         </div>
     );
 };

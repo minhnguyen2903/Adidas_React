@@ -1,5 +1,4 @@
 import Icon from "@material-ui/core/Icon";
-import Helper from "../../helper/helper";
 const RenderSelectedFilter = (props: any) => {
     const removeFilter = (element: any) => {
         const locate = window.location.href;

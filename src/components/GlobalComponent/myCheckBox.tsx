@@ -53,7 +53,6 @@ export const MyCheckBox = (props: any) => {
 
 export const CheckBoxNoAction = (props: any) => {
     const [isChecked, setIsChecked] = useState(false)
-
     return (
         <div className="filter-dropdown-item text-capitalize d-flex align-items-center position-relative w-auto" style={{height: "fit-content"}}>
             <label
@@ -69,6 +68,7 @@ export const CheckBoxNoAction = (props: any) => {
                 className="position-absolute w-100 bg-warning cursor-pointer"
                 type="checkbox"
                 name={props.name}
+                value={props.value}
                 style={{ height: "42px", opacity: "0" }}
                 onClick={() => {
                     setIsChecked(!isChecked)

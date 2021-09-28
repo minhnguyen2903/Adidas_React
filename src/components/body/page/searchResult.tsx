@@ -18,7 +18,6 @@ const Searchresult = () => {
     const objQuery = Helper.searchToObject()
 
     const searchResultFor = (key: string) => {
-        console.log(objQuery)
         let result = "";
         Object.keys(objQuery).forEach((element: any) => {
             if(result === "") {
@@ -51,7 +50,6 @@ const Searchresult = () => {
         if(rawQuery.includes("&startAt")) {
             rawQuery = rawQuery.replace(`&startAt=${objQuery.startAt}`, "")
         }
-        console.log(rawQuery)
         let a = rawQuery.split("");
         const b: any = [];
         const c: any = [];

@@ -117,7 +117,6 @@ input {
     z-index: 10;
     font-size: 0.8em;
     transform: translate(-10px, -22px);
-    transition: 0.3s;
 }
 
 .search-bar input:hover {

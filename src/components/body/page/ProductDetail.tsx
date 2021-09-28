@@ -37,16 +37,7 @@ const ProductInfo = (props: any) => {
     });
 
     const dispatch = useDispatch();
-    const [sizeList, setSizeList] = useState([
-        "3",
-        "4",
-        "5",
-        "6",
-        "7",
-        "8",
-        "9",
-        "10",
-    ]);
+    const sizeList:any = [3, 4, 5, 6, 7, 8, 9, 10];
     const [size, setSize] = useState("");
 
     const filterAction = (productDetail: any) => {

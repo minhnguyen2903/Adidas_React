@@ -17,9 +17,8 @@ const RenderSearchResult = (props: any) => {
                     <CardProduct state={item} wishListShow={true} />
                 </div>
             );
-        } else {
-            return;
         }
+        return null;
     });
     if (products.length > 0) {
         return (

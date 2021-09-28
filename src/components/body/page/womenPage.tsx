@@ -43,37 +43,37 @@ const WomenPage = () => {
                             >
                                 <Link
                                     to="/"
-                                    className="text-uppercase p-1 ps-2 pe-2 m-2 text-medium"
+                                    className="w-auto text-uppercase p-1 ps-2 pe-2 m-2 text-medium"
                                 >
                                     home
                                 </Link>
                                 <Link
                                     to="/"
-                                    className="text-uppercase p-1 ps-2 pe-2 m-2 text-medium"
+                                    className="w-auto text-uppercase p-1 ps-2 pe-2 m-2 text-medium"
                                 >
                                     shoes
                                 </Link>
                                 <Link
                                     to="/"
-                                    className="text-uppercase p-1 ps-2 pe-2 m-2 text-medium"
+                                    className="w-auto text-uppercase p-1 ps-2 pe-2 m-2 text-medium"
                                 >
                                     clothing
                                 </Link>
                                 <Link
                                     to="/"
-                                    className="text-uppercase p-1 ps-2 pe-2 m-2 text-medium"
+                                    className="w-auto text-uppercase p-1 ps-2 pe-2 m-2 text-medium"
                                 >
                                     accessories
                                 </Link>
                                 <Link
                                     to="/"
-                                    className="text-uppercase p-1 ps-2 pe-2 m-2 text-medium text-nowrap"
+                                    className="w-auto text-uppercase p-1 ps-2 pe-2 m-2 text-medium text-nowrap"
                                 >
                                     new arrivals
                                 </Link>
                                 <Link
                                     to="/"
-                                    className="text-uppercase p-1 ps-2 pe-2 m-2 text-medium text-nowrap"
+                                    className="w-auto text-uppercase p-1 ps-2 pe-2 m-2 text-medium text-nowrap"
                                 >
                                     view all products
                                 </Link>

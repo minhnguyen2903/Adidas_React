@@ -15,9 +15,11 @@ export const PostWithAuthentication = async (url: any, token: any) => {
         method: "POST",
         url: url,
         headers: {
-            "Content-Type": "application/xml",
+            "Content-Type": "application/json",
             "Authorization": `Bearer ${token}`
         }
-    }).then((res:any) => res.data.authData.user).catch((err:any) => {console.log(err)});
+    }).then((res: any) => {
+        return res.data
+    }).catch((err:any) => {console.log(err); localStorage.removeItem("__token")});
     return response;
 }

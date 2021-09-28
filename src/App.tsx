@@ -29,33 +29,14 @@ import {
     AddProductDetail,
     RemoveSearchResult,
     AddToSearchResult,
-    PrevPath,
 } from "./redux/action/action";
 import * as Request from "./axiosRequest/request";
+import myAccount from "./components/body/page/myAccount";
 
 function App() {
     const dispatch = useDispatch();
-    const path = useSelector((state: any) => state.prevPath.path);
     const isSigned = useSelector((state: any) => state.isSign.signIn);
 
-    const saveToLocalStorage = (key: any, obj: any) => {
-        const getLocalStorage = JSON.parse(String(localStorage.getItem(key)));
-        if (getLocalStorage !== null) {
-            if (getLocalStorage.length > 0) {
-                localStorage.setItem(
-                    key,
-                    JSON.stringify([...getLocalStorage, obj])
-                );
-            } else {
-                localStorage.setItem(
-                    key,
-                    JSON.stringify([getLocalStorage, obj])
-                );
-            }
-        } else {
-            localStorage.setItem(key, JSON.stringify(obj));
-        }
-    };
     const getItemFromLocal = (key: any, addItem: any, removeFunc: any) => {
         const localItem = JSON.parse(String(localStorage.getItem(key)));
         if (localItem !== null) {
@@ -72,23 +53,32 @@ function App() {
         }
     };
 
-    const getPrevPath = () => {
-        if (window.location.pathname !== path) {
-            dispatch(PrevPath(window.location.pathname));
+    const verifyToken = () => {
+        const token = localStorage.getItem("__token");
+        if(token) {
+            Request.PostWithAuthentication(`${process.env.REACT_APP_SERVER_URL}/verify`, token).then((res: any) => {
+                sessionStorage.setItem("_user", JSON.stringify(res));
+                dispatch(SignIn({isSigned: true, res}))
+            })
+        } else {
+            dispatch(SignIn({isSigned: false}))
+            sessionStorage.removeItem("_user")
         }
-    };
-
+    }
     useEffect(() => {
         Request.GetData(`${process.env.REACT_APP_SERVER_URL}/api/all-products`).then(
             (result: any) => {
                 dispatch(GetAllProduct(result));
             }
         );
+        verifyToken();
+    }, [])
+
+    useEffect(() => {
         getItemFromLocal("wishList", AddToWishList, RemoveAllWishList);
         getItemFromLocal("cart", AddToCart, RemoveAllCart);
         getItemFromLocal("lastView", AddProductDetail, null);
         getItemFromLocal("searchResult", AddToSearchResult, RemoveSearchResult);
-        getPrevPath();
     }, [isSigned]);
 
     return (
@@ -128,6 +118,11 @@ function App() {
                         path="/search/:productId"
                         exact
                         component={ProductInfo}
+                    />
+                    <Route
+                        path="/myAccount"
+                        exact
+                        component={myAccount}
                     />
                 </Switch>
                 <Footer />

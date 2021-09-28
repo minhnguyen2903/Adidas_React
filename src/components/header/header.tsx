@@ -8,7 +8,7 @@ const HeaderComponent = () => {
     const [show, setShow] = useState(false);
     return (
         <header className="bg-white w-100 border-bottom d-flex align-items-center">
-            <div id="header-container" className="w-100 h-100 d-flex align-items-center">
+            <div id="header-container" className="w-100 h-100 d-flex align-items-center position-relative">
                 <div className="row w-100 h-100">
                     <div className="col w-100 px-lg-5 px-3">
                         <HeaderTopTop />

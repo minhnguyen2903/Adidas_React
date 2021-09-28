@@ -1,8 +1,7 @@
-import { useState } from "react";
 import {Col } from "react-bootstrap";
 
 const DropDown = (props: any) => {
-    const [list, setList] = useState({
+    const list = {
         men: [
             {
                 name: "featured",
@@ -99,7 +98,7 @@ const DropDown = (props: any) => {
                 all: "all sports"
             }
         ]
-    })
+    }
 
     const renderDropdown = (obj: any, category: any) => {
         const renderList = obj.map((item: any) => {
@@ -149,10 +148,10 @@ const DropDown = (props: any) => {
 
         return (
             <div className="w-100 index-999">
-                <div className="w-100 row padding-200 ">
+                <div className="w-100 row padding-200 px-md-5">
                     {renderList}
                 </div>
-                <div className="w-100 row dropdown-bottom padding-200">
+                <div className="w-100 row dropdown-bottom padding-200 px-md-5">
                     {renderListBottom}
                 </div>
             </div>

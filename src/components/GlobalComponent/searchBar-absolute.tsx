@@ -25,7 +25,7 @@ const SearchBarAbsolute = (props: any) => {
 
     return (
         <Row
-            className={`row search-bar-absolute position-absolute align-items-center w-100 h-100 ps-3 pe-3 ${
+            className={`row search-bar-absolute position-absolute align-items-center m-0 h-100 w-100 ps-3 pe-3 ${
                 props.show ? "d-flex" : "d-none"
             }`}
             onKeyUp={(event: any) => {
@@ -36,13 +36,14 @@ const SearchBarAbsolute = (props: any) => {
         >
             <div
                 className="d-flex align-items-center end-0 col-1"
+                style={{width: "30px"}}
                 onClick={() => {
                     props.handleShow(false);
                 }}
             >
                 <Icon className="cursor-pointer gl-icon">chevron_left</Icon>
             </div>
-            <div className="col-11 row position-relative align-items-center">
+            <div className="row position-relative align-items-center" style={{width: "calc(100% - 30px)"}}>
                 <input
                     type="text"
                     autoComplete="off"
@@ -54,7 +55,7 @@ const SearchBarAbsolute = (props: any) => {
                     autoFocus={true}
                 />
                 <div
-                    className="position-absolute d-flex  align-items-center end-0"
+                    className="position-absolute d-flex align-items-center end-0 w-auto"
                     onClick={() => {
                         searchSubmit();
                     }}
