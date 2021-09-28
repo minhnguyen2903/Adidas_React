@@ -14,17 +14,17 @@ const BodyComponent = () => {
         <main className="pb-5">
             <div className="main-content">
                 <Banner
-                    imgLg="https://brand.assets.adidas.com/image/upload/f_auto,q_auto,fl_lossy/enVN/Images/YEEZY_BOOST_700_MNVN_BLUE_TINT_HP_DT_tcm212-711640.jpg"
-                    imgMd="https://brand.assets.adidas.com/image/upload/f_auto,q_auto,fl_lossy/enVN/Images/YEEZY_BOOST_700_MNVN_BLUE_TINT_HP_T_tcm212-711641.jpg"
-                    imgSm="https://brand.assets.adidas.com/image/upload/f_auto,q_auto,fl_lossy/enVN/Images/YEEZY_BOOST_700_MNVN_BLUE_TINT_HP_M_tcm212-711639.jpg"
+                    imgLg={`${process.env.REACT_APP_SERVER_URL}/YEEZY_BOOST_700_MNVN_BLUE_TINT_HP_DT_tcm212-711640.jpg`}
+                    imgMd={`${process.env.REACT_APP_SERVER_URL}/YEEZY_BOOST_700_MNVN_BLUE_TINT_HP_T_tcm212-711641.jpg`}
+                    imgSm={`${process.env.REACT_APP_SERVER_URL}/YEEZY_BOOST_700_MNVN_BLUE_TINT_HP_M_tcm212-711639.jpg`}
                     title="yeezy boost 700 mnvn blue tint"
                     description="COMING SOON 5 JULY"
                     button="preview now"
                 />
                 <Banner
-                    imgLg="https://brand.assets.adidas.com/image/upload/f_auto,q_auto,fl_lossy/enVN/Images/vn-3sd-sale-mh-d_tcm212-702997.jpg"
-                    imgMd="https://brand.assets.adidas.com/image/upload/f_auto,q_auto,fl_lossy/enVN/Images/vn-3sd-sale-mh-m_tcm212-702998.jpg"
-                    imgSm="https://brand.assets.adidas.com/image/upload/f_auto,q_auto,fl_lossy/enVN/Images/vn-3sd-sale-mh-m_tcm212-702998.jpg"
+                    imgLg={`${process.env.REACT_APP_SERVER_URL}/vn-3sd-sale-mh-d_tcm212-702997.jpg`}
+                    imgMd={`${process.env.REACT_APP_SERVER_URL}/vn-3sd-sale-mh-m_tcm212-702998.jpg`}
+                    imgSm={`${process.env.REACT_APP_SERVER_URL}/vn-3sd-sale-mh-m_tcm212-702998.jpg`}
                     title=" "
                     description="Discount applied at cart. Exclusions apply. Terms and conditions apply."
                     button="shop now"
