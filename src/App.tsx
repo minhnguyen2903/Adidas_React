@@ -59,6 +59,10 @@ function App() {
             await Request.PostWithAuthentication(`${process.env.REACT_APP_SERVER_URL}/verify`, token).then((res: any) => {
                 sessionStorage.setItem("_user", JSON.stringify(res));
                 dispatch(SignIn({isSigned: true, res}))
+            }).catch((err: any) => {
+                sessionStorage.removeItem("_user");
+                dispatch(SignIn({isSigned: false}))
+                throw err;
             })
         } else {
             dispatch(SignIn({isSigned: false}))
