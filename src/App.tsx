@@ -53,10 +53,10 @@ function App() {
         }
     };
 
-    const verifyToken = () => {
+    const verifyToken = async () => {
         const token = localStorage.getItem("__token");
         if(token) {
-            Request.PostWithAuthentication(`${process.env.REACT_APP_SERVER_URL}/verify`, token).then((res: any) => {
+            await Request.PostWithAuthentication(`${process.env.REACT_APP_SERVER_URL}/verify`, token).then((res: any) => {
                 sessionStorage.setItem("_user", JSON.stringify(res));
                 dispatch(SignIn({isSigned: true, res}))
             })
