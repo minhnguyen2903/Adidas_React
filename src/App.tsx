@@ -12,6 +12,8 @@ import Delivery from "./components/body/page/delivery";
 import Cart from "./components/body/page/cart";
 import Login from "./components/body/page/login";
 import AccountRegister from "./components/body/page/register";
+import MyAccount from "./components/body/page/myAccount";
+
 import "bootstrap/dist/css/bootstrap.css";
 import "./asserts/style/style.css";
 import "./App.css";
@@ -31,7 +33,6 @@ import {
     AddToSearchResult,
 } from "./redux/action/action";
 import * as Request from "./axiosRequest/request";
-import myAccount from "./components/body/page/myAccount";
 
 function App() {
     const dispatch = useDispatch();
@@ -57,8 +58,8 @@ function App() {
         const token = localStorage.getItem("__token");
         if(token) {
             await Request.PostWithAuthentication(`${process.env.REACT_APP_SERVER_URL}/verify`, token).then((res: any) => {
-                sessionStorage.setItem("_user", JSON.stringify(res));
-                dispatch(SignIn({isSigned: true, res}))
+                sessionStorage.setItem("_user", JSON.stringify(res.data));
+                dispatch(SignIn({isSigned: true, account: res.data}))
             }).catch((err: any) => {
                 sessionStorage.removeItem("_user");
                 dispatch(SignIn({isSigned: false}))
@@ -123,11 +124,11 @@ function App() {
                         exact
                         component={ProductInfo}
                     />
-                    <Route
+                    {isSigned?<Route
                         path="/myAccount"
                         exact
-                        component={myAccount}
-                    />
+                        component={MyAccount}
+                    />: null}
                 </Switch>
                 <Footer />
             </Router>
