@@ -10,10 +10,12 @@ export const PostData = async (url: string, body: any) => {
     return response;
 }
 
-export const PostWithAuthentication = async (url: any, token: any) => {
+export const PostWithAuthentication = async (url: any, token: any, data?: any) => {
+    
     const response = await axios({
         method: "POST",
         url: url,
+        data: data || {},
         headers: {
             "Content-Type": "application/json",
             "Authorization": `Bearer ${token}`

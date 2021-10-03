@@ -19,26 +19,23 @@ const Searchresult = () => {
 
     const searchResultFor = (key: string) => {
         let result = "";
-        Object.keys(objQuery).forEach((element: any) => {
-            if(result === "") {
-                result = objQuery[element]
-            } else {
-                if(element === "q") {
-                    result = `${objQuery[element]} + ${result}`
-                } else {
-                    result += ` + ${objQuery[element]}`
-                }
-            }
-
-        })
-/*         const splitKey = key.split("");
-        let indexEnd;
-        if (splitKey.indexOf("&") !== -1) {
-            indexEnd = splitKey.indexOf("&");
+        if(window.location.search.includes("?startAt")) {
+            result = "all products"
         } else {
-            indexEnd = splitKey.length;
+            Object.keys(objQuery).forEach((element: any) => {
+                if(result === "" && element !== "startAt") {
+                    result = objQuery[element]
+                } else {
+                    if(element === "q") {
+                        result = `${objQuery[element]} + ${result}`
+                    } else if(element === "startAt") {
+                        return;
+                    } else {
+                        result += ` + ${objQuery[element]}`
+                    }
+                }
+            })
         }
-        return key.substring(3, indexEnd).replace("%20", " "); */
         return result;
     };
 

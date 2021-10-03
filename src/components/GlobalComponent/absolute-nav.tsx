@@ -17,12 +17,12 @@ const AbsoluteNav = (props: any) => {
       data-aos="fade-right"
     >
       <div className="absolute-nav-header row w-100 border-bottom d-flex justify-content-between align-items-center p-3">
-        <div></div>
-        <div className="h-100 w-auto">
-          <img src={logo} alt="" width="70" className="h-100" />
+        <div className="col"></div>
+        <div className="h-100 w-auto col d-flex justify-content-center">
+          <img src={logo} alt="" width="70px" height="47px" />
         </div>
         <div
-          className="w-auto d-flex justify-content-center align-items-end cursor-pointer"
+          className="w-auto col d-flex justify-content-end align-items-center cursor-pointer"
           onClick={() => {
             props.handleShow(false);
           }}
@@ -31,7 +31,7 @@ const AbsoluteNav = (props: any) => {
         </div>
       </div>
       <div className="absolute-nav-body pb-3 pt-3 border-bottom">
-        <div className="h-100 p-3 cursor-pointer d-flex align-items-center justify-content-between ">
+        <div className="h-100 p-3 cursor-pointer d-flex align-items-center justify-content-between">
           <span
             className="text-uppercase text-700 letter-spacing button_active"
             style={{ fontSize: "1.5em" }}
@@ -78,17 +78,23 @@ const AbsoluteNav = (props: any) => {
         </div>
       </div>
       <div className="absolute-nav-profile p-3">
-        <div className="mb-3">
+        <div className="mb-3" onClick={() => {
+            props.handleShow(false);
+          }}>
           <Link to="/account-login" style={{ fontSize: "1.5em" }}>
             My Profile
           </Link>
         </div>
-        <div className="mb-3">
+        <div className="mb-3" onClick={() => {
+            props.handleShow(false);
+          }}>
           <Link to="/account-login" style={{ fontSize: "1.5em" }}>
             Store Locator
           </Link>
         </div>
-        <div className="mb-3">
+        <div className="mb-3" onClick={() => {
+            props.handleShow(false);
+          }}>
           <Link to="/account-login" style={{ fontSize: "1.5em" }}>
             Newsletter Signup
           </Link>

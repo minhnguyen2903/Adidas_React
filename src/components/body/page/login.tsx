@@ -31,7 +31,6 @@ const Login = () => {
 
     const responseFacebook = (response: any) => {
         if (response.status !== "unknown") {
-            dispatch(SignIn(true));
             sessionStorage.setItem(
                 "_user",
                 JSON.stringify(response)
@@ -58,7 +57,6 @@ const Login = () => {
                 .then((res: any) => {
                     setInvalid(false);
                     localStorage.setItem("__token", res.data);
-                    dispatch(SignIn(true));
                     window.location.href = "/";
                 })
                 .catch((err: any) => {
@@ -113,7 +111,7 @@ const Login = () => {
                                     />
                                     <span className="d-block mt-3 ">OR</span>
                                     <GoogleLogin
-                                        clientId="733293982707-ame53i3dj0oe9u4k6kfj4g0eeg9rcm2j.apps.googleusercontent.com"
+                                        clientId={`${process.env.REACT_APP_GOOGLE_CLIENT}`}
                                         buttonText="GOOGLE"
                                         onSuccess={responseGoogle}
                                         onFailure={responseGoogle}
@@ -121,7 +119,7 @@ const Login = () => {
                                         className="login_styled"
                                     />
                                     <ReactFacebookLogin
-                                        appId="874709023460058"
+                                        appId={`${process.env.REACT_APP_FACEBOOK_CLIENT}`}
                                         autoLoad={false}
                                         fields="name,email,picture"
                                         callback={responseFacebook}

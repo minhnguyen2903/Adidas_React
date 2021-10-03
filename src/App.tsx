@@ -22,118 +22,113 @@ import "./modifyBootstrap.css";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
-    SignIn,
-    GetAllProduct,
-    AddToWishList,
-    RemoveAllWishList,
-    RemoveAllCart,
-    AddToCart,
-    AddProductDetail,
-    RemoveSearchResult,
-    AddToSearchResult,
+  SignIn,
+  GetAllProduct,
+  AddToWishList,
+  RemoveAllWishList,
+  RemoveAllCart,
+  AddToCart,
+  AddProductDetail,
+  RemoveSearchResult,
+  AddToSearchResult,
 } from "./redux/action/action";
 import * as Request from "./axiosRequest/request";
+import Helper from "./helper/helper";
 
 function App() {
-    const dispatch = useDispatch();
-    const isSigned = useSelector((state: any) => state.isSign.signIn);
+  const dispatch = useDispatch();
+  const isSigned = useSelector((state: any) => state.isSign);
 
-    const getItemFromLocal = (key: any, addItem: any, removeFunc: any) => {
-        const localItem = JSON.parse(String(localStorage.getItem(key)));
-        if (localItem !== null) {
-            if (removeFunc) {
-                dispatch(removeFunc());
-            }
-            if (localItem.length >= 1) {
-                localItem.forEach((item: any) => {
-                    dispatch(addItem(item));
-                });
-            } else {
-                dispatch(addItem(localItem));
-            }
-        }
-    };
-
-    const verifyToken = async () => {
-        const token = localStorage.getItem("__token");
-        if(token) {
-            await Request.PostWithAuthentication(`${process.env.REACT_APP_SERVER_URL}/verify`, token).then((res: any) => {
-                sessionStorage.setItem("_user", JSON.stringify(res.data));
-                dispatch(SignIn({isSigned: true, account: res.data}))
-            }).catch((err: any) => {
-                sessionStorage.removeItem("_user");
-                dispatch(SignIn({isSigned: false}))
-                throw err;
-            })
-        } else {
-            dispatch(SignIn({isSigned: false}))
-            sessionStorage.removeItem("_user")
-        }
+  const getItemFromLocal = (key: any, addItem: any, removeFunc: any) => {
+    const localItem = JSON.parse(String(localStorage.getItem(key)));
+    if (localItem !== null) {
+      if (removeFunc) {
+        dispatch(removeFunc());
+      }
+      if (localItem.length >= 1) {
+        localItem.forEach((item: any) => {
+          dispatch(addItem(item));
+        });
+      } else {
+        dispatch(addItem(localItem));
+      }
     }
-    useEffect(() => {
-        Request.GetData(`${process.env.REACT_APP_SERVER_URL}/api/all-products`).then(
-            (result: any) => {
-                dispatch(GetAllProduct(result));
-            }
-        );
-        verifyToken();
-    }, [])
+  };
 
-    useEffect(() => {
-        getItemFromLocal("wishList", AddToWishList, RemoveAllWishList);
-        getItemFromLocal("cart", AddToCart, RemoveAllCart);
-        getItemFromLocal("lastView", AddProductDetail, null);
-        getItemFromLocal("searchResult", AddToSearchResult, RemoveSearchResult);
-    }, [isSigned]);
+  const verifyToken = async () => {
+    const token = localStorage.getItem("__token");
+    if (token) {
+      await Request.PostWithAuthentication(
+        `${process.env.REACT_APP_SERVER_URL}/user/info`,
+        token
+      )
+        .then((res: any) => {
+          if(localStorage.wishList) {
+            localStorage.removeItem("wishList");
+          }
+          if(res.data.wishLists.length > 0) {
+            Helper.saveToLocalStorage("wishList", res.data.wishLists)
+          }
+          if(localStorage.cart) {
+            localStorage.removeItem("cart");
+          }
+          if(res.data.carts.length > 0) {
+            Helper.saveToLocalStorage("cart", res.data.carts)
+          }
+          dispatch(SignIn(res.data));
+        })
+        .catch((err: any) => {
+          localStorage.removeItem("__token");
+          throw err;
+        });
+    } else {
+      dispatch(SignIn(false));
+      localStorage.removeItem("wishList");
+      localStorage.removeItem("cart");  
+    }
+  };
+  useEffect(() => {
+    verifyToken();
+    Request.GetData(
+      `${process.env.REACT_APP_SERVER_URL}/api/all-products`
+    ).then((result: any) => {
+      dispatch(GetAllProduct(result));
+    });
+  }, []);
 
-    return (
-        <div className="App">
-            <Router>
-                <HeaderComponent />
-                <Switch>
-                    <Route exact path="/" component={BodyComponent}></Route>
-                    <Route exact path="/men">
-                        <MenPage />
-                    </Route>
-                    <Route exact path="/women" component={WomenPage}></Route>
-                    <Route exact path="/kids" component={KidsPage}></Route>
-                    <Route
-                        exact
-                        path="/search"
-                        component={Searchresult}
-                    ></Route>
-                    <Route
-                        exact
-                        path="/wishlist-show"
-                        component={WishListShow}
-                    ></Route>
-                    <Route exact path="/cart" component={Cart}></Route>
-                    <Route
-                        exact
-                        path="/account-login"
-                        component={Login}
-                    ></Route>
-                    <Route exact path="/delivery" component={Delivery}></Route>
-                    <Route
-                        exact
-                        path="/account-register"
-                        component={AccountRegister}
-                    ></Route>
-                    <Route
-                        path="/search/:productId"
-                        exact
-                        component={ProductInfo}
-                    />
-                    {isSigned?<Route
-                        path="/myAccount"
-                        exact
-                        component={MyAccount}
-                    />: null}
-                </Switch>
-                <Footer />
-            </Router>
-        </div>
-    );
+  useEffect(() => {
+    getItemFromLocal("wishList", AddToWishList, RemoveAllWishList);
+    getItemFromLocal("cart", AddToCart, RemoveAllCart);
+    getItemFromLocal("lastView", AddProductDetail, null);
+    getItemFromLocal("searchResult", AddToSearchResult, RemoveSearchResult);
+  }, [isSigned]);
+
+  return (
+    <div className="App">
+      <Router>
+        <HeaderComponent />
+        <Switch>
+          <Route exact path="/" component={BodyComponent}></Route>
+          <Route exact path="/men">
+            <MenPage />
+          </Route>
+          <Route exact path="/women" component={WomenPage}></Route>
+          <Route exact path="/kids" component={KidsPage}></Route>
+          <Route exact path="/search" component={Searchresult}></Route>
+          <Route exact path="/wishlist-show" component={WishListShow}></Route>
+          <Route exact path="/cart" component={Cart}></Route>
+          <Route exact path="/account-login" component={Login}></Route>
+          <Route exact path="/delivery" component={Delivery}></Route>
+          <Route exact path="/account-register" component={AccountRegister}></Route>
+          <Route path="/search/:productId" exact component={ProductInfo} />
+          {isSigned ? (
+            <Route path="/myAccount" exact component={MyAccount} />
+          ) : null}
+        </Switch>
+        <Footer />
+      </Router>
+    </div>
+  );
 }
 
 export default App;

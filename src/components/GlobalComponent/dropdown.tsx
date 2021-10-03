@@ -1,5 +1,3 @@
-import {Col } from "react-bootstrap";
-
 const DropDown = (props: any) => {
     const list = {
         men: [
@@ -37,33 +35,33 @@ const DropDown = (props: any) => {
         women: [
             {
                 name: "featured",
-                items: ["new arrivals", "this week's top sellers", "ultraboost 21 - new colourways", "stan smith", "4d", "ZX", "a-ZX series"],
-                all: "all men's"
+                items: ["new arrivals", "this week's top sellers"," ", "ultraboost 21 - new colourways", "stan smith", "4d", "ZX", "a-ZX series"],
+                all: "all women's"
             },
             {
                 name: "shoes",
                 items: ["originals", "football", "running", "sprots inspired", "outdoor", "basketball", "slides", "tennis"],
-                all: "all men's shoes"
+                all: "all women's shoes"
             },
             {
                 name: "clothing",
                 items: ["t-shirts & polos", "jerseys", "Hoodies & Jackets", "Sweatshirts & tracksuits", "pants", "tights", "shorts", "compression layers"],
-                all: "all men's clothing"
+                all: "all women's clothing"
             },
             {
                 name: "accessories",
                 items: ["all bags", "backpacks", "training bags", "socks", "caps & headwear", "gloves", "balls", "shinguards & straps", "face covers"],
-                all: "all men's accessories"
+                all: "all women's accessories"
             },
             {
                 name: "sale",
                 items: ["shoes", "clothing", "accessories"],
-                all: "all men's sale"
+                all: "all women's sale"
             },
             {
                 name: "sports",
                 items: ["football", "running", "training", "basketball", "swimming", "golf", "tennis"],
-                all: "all men's sports"
+                all: "all women's sports"
             }
         ],
         kids: [
@@ -105,7 +103,7 @@ const DropDown = (props: any) => {
             const index = obj.indexOf(item);
             if(index === 0) {
                 return (
-                    <Col key={index} className="col-3 nav-first-row ps-4 pt-5 pb-3">
+                    <div key={index} className="col-3 nav-first-row ps-4 pt-5 pb-3">
                         <div className="text-600 text-uppercase letter-spacing pb-3 text-small">{item.name}</div>
                         <ul className="dropdown-list">
                             {item.items.map((element: any) => {
@@ -115,11 +113,11 @@ const DropDown = (props: any) => {
                                 )
                             })}
                         </ul>
-                    </Col>
+                    </div>
                     )
             } else {
                 return (
-                    <Col key={index} className="ps-4 pt-5 pb-3">
+                    <div key={index} className="ps-4 pt-5 pb-3 col">
                         <div className="text-600 text-uppercase letter-spacing pb-3 text-small">{item.name}</div>
                         <ul className="dropdown-list">
                             {item.items.map((element: any) => {
@@ -129,7 +127,7 @@ const DropDown = (props: any) => {
                                 )
                             })}
                         </ul>
-                    </Col>
+                    </div>
                     )
             }
         })
@@ -137,11 +135,11 @@ const DropDown = (props: any) => {
             const index = obj.indexOf(item);
             if(index === 0) {
                 return (
-                    <Col key={index} className="text-capitalize text-600 col-3 ps-4 text-small">{item.all}</Col>
+                    <div key={index} className="text-capitalize text-600 col-3 ps-4 text-small">{item.all}</div>
                 )
             } else {
                 return (
-                    <Col key={index} className="text-capitalize text-600 ps-4 text-small">{item.all}</Col>
+                    <div key={index} className="col text-capitalize text-600 ps-4 text-small">{item.all}</div>
                 )
             }
         })
@@ -175,7 +173,7 @@ const DropDown = (props: any) => {
         }
     }
     return (
-        <div className="row nav-dropdown" >
+        <div className="row nav-dropdown">
             {
                 switchRender(props.target)
             }

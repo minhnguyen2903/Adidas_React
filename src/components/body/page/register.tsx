@@ -4,33 +4,29 @@ import { useState } from "react";
 import { GoogleLogin } from "react-google-login";
 import FacebookLogin from "react-facebook-login";
 import FacebookLogo from "../../../asserts/img/icon/facebook-circular-logo.svg";
-import { useDispatch } from "react-redux";
-import { SignIn } from "../../../redux/action/action";
 import axios from "axios";
 import {
   InputComponent,
   DateInput,
 } from "../../GlobalComponent/inputComponent";
 import { CheckBoxNoAction } from "../../GlobalComponent/myCheckBox";
-
+const initialUser = {
+  firstName: "",
+  lastName: "",
+  phoneNumber: "",
+  location: "",
+  birth: "",
+  email: "",
+  password: "",
+}
 const AccountRegister = () => {
   const [disabled, setDisabled] = useState(false);
   const [isValid, setIsValid] = useState(true);
-  const [user, setUser] = useState({
-    firstName: "",
-    lastName: "",
-    phoneNumber: "",
-    location: "",
-    birth: "",
-    email: "",
-    password: "",
-  });
-
-  const dispatch = useDispatch();
+  const [isDuplicate, setISDuplicate] = useState(false);
+  const [user, setUser] = useState(initialUser);
 
   const responseGoogle = (response: any) => {
     if (response) {
-      dispatch(SignIn(true));
       sessionStorage.setItem("Google_account", JSON.stringify(response));
       // window.location.href = "/";
     } else {
@@ -40,7 +36,6 @@ const AccountRegister = () => {
 
   const responseFacebook = (response: any) => {
     if (response.status !== "unknown") {
-      dispatch(SignIn(true));
       sessionStorage.setItem("Facebook_account", JSON.stringify(response));
       window.location.href = "/";
     } else {
@@ -55,6 +50,7 @@ const AccountRegister = () => {
   const submitAction = async () => {
     const data = new FormData();
     setDisabled(true);
+    setISDuplicate(false);
     Object.keys(user).forEach((element: any) => {
       if ((user as any)[element] === "") {
         setIsValid(false);
@@ -78,6 +74,9 @@ const AccountRegister = () => {
           window.location.href = "/";
         })
         .catch((err: any) => {
+          setDisabled(false);
+          setISDuplicate(true);
+          setUser(initialUser);
           throw err;
         });
     }
@@ -277,6 +276,7 @@ const AccountRegister = () => {
                     </p>
                   </div>
                 </div>
+                {isDuplicate?<p className="m-0 p-0 ms-2 mt-1" style={{color: "red"}}>User Already Exist. Please Login</p>: null}
                 <div className="submit-button">
                   <ButtonActive
                     text="REGISTER"
