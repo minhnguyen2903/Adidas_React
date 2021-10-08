@@ -56,11 +56,15 @@ function App() {
   };
 
   const verifyToken = async () => {
-    const token = localStorage.getItem("__token");
+    let token = JSON.parse(String(localStorage.getItem("__token")));
     if (token) {
+      if(Date.now() >= token.expireTime*1000) {
+        await Request.RefreshToken(`${process.env.REACT_APP_SERVER_URL}/refreshToken`, token.refreshToken)
+        token = JSON.parse(String(localStorage.getItem("__token")));
+      }
       await Request.PostWithAuthentication(
         `${process.env.REACT_APP_SERVER_URL}/user/info`,
-        token
+        token.token
       )
         .then((res: any) => {
           if(localStorage.wishList) {

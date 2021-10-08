@@ -15,7 +15,7 @@ const Searchresult = () => {
     const [fetchDone, setFetchDone] = useState(false);
     const searchKey = window.location.search;
     const dispatch = useDispatch();
-    const objQuery = Helper.searchToObject()
+    const objQuery = Helper.searchToObject();
 
     const searchResultFor = (key: string) => {
         let result = "";

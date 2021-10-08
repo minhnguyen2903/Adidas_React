@@ -11,7 +11,6 @@ export const PostData = async (url: string, body: any) => {
 }
 
 export const PostWithAuthentication = async (url: any, token: any, data?: any) => {
-    
     const response = await axios({
         method: "POST",
         url: url,
@@ -21,5 +20,21 @@ export const PostWithAuthentication = async (url: any, token: any, data?: any) =
             "Authorization": `Bearer ${token}`
         }
     })
+    return response;
+}
+
+export const RefreshToken = async (url: any, refreshToken: any, data?: any) => {
+    
+    const response = await axios({
+        method: "POST",
+        url: url,
+        data: data || {},
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${refreshToken}`
+        }
+    }).then((res: any) => {
+        localStorage.setItem("__token", JSON.stringify(res.data))
+    }).catch((err: any) => {throw err})
     return response;
 }

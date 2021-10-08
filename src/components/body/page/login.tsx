@@ -56,7 +56,7 @@ const Login = () => {
                 .post(`${process.env.REACT_APP_SERVER_URL}/login`, data)
                 .then((res: any) => {
                     setInvalid(false);
-                    localStorage.setItem("__token", res.data);
+                    localStorage.setItem("__token", JSON.stringify(res.data));
                     window.location.href = "/";
                 })
                 .catch((err: any) => {
