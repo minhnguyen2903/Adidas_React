@@ -70,7 +70,7 @@ const AccountRegister = () => {
           headers: { "Content-Type": "multipart/form-data" },
         })
         .then((res: any) => {
-          localStorage.setItem("__token", res.data);
+          localStorage.setItem("__token", JSON.stringify(res.data));
           window.location.href = "/";
         })
         .catch((err: any) => {

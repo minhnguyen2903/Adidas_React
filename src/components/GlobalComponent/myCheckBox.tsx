@@ -71,7 +71,42 @@ export const CheckBoxNoAction = (props: any) => {
                 value={props.value}
                 style={{ height: "42px", opacity: "0" }}
                 onClick={() => {
-                    setIsChecked(!isChecked)
+                    setIsChecked(!isChecked);
+                    if(props.action) {
+                        props.action();
+                    }
+                }}
+            />
+        </div>
+    );
+}
+
+export const CheckBoxRadio = (props: any) => {
+    return (
+        <div className="filter-dropdown-item text-capitalize d-flex align-items-center position-relative w-auto" style={{height: "fit-content"}}>
+            <label
+                className={`m-0 w-100 d-flex align-items-center ps-3 ${
+                    props.isChecked ? "filter-dropdown-item-checked" : ""
+                }`}
+                htmlFor={props.name}
+                style={{ height: "40px" }}
+            >
+                {props.name}
+            </label>
+            <input
+                className="position-absolute w-100 bg-warning cursor-pointer"
+                type="checkbox"
+                name={props.name}
+                value={props.value}
+                style={{ height: "42px", opacity: "0" }}
+                onClick={() => {
+                    if(props.action) {
+                        if(props.isChecked === true) {
+                            props.action("");
+                        } else {
+                            props.action(props.name);
+                        }
+                    }
                 }}
             />
         </div>

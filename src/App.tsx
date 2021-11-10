@@ -57,42 +57,47 @@ function App() {
 
   const verifyToken = async () => {
     let token = JSON.parse(String(localStorage.getItem("__token")));
-    if (token) {
-      if(Date.now() >= token.expireTime*1000) {
-        await Request.RefreshToken(`${process.env.REACT_APP_SERVER_URL}/refreshToken`, token.refreshToken)
-        token = JSON.parse(String(localStorage.getItem("__token")));
-      }
-      await Request.PostWithAuthentication(
-        `${process.env.REACT_APP_SERVER_URL}/user/info`,
-        token.token
-      )
-        .then((res: any) => {
-          if(localStorage.wishList) {
-            localStorage.removeItem("wishList");
-          }
-          if(res.data.wishLists.length > 0) {
-            Helper.saveToLocalStorage("wishList", res.data.wishLists)
-          }
-          if(localStorage.cart) {
-            localStorage.removeItem("cart");
-          }
-          if(res.data.carts.length > 0) {
-            Helper.saveToLocalStorage("cart", res.data.carts)
-          }
-          dispatch(SignIn(res.data));
-        })
-        .catch((err: any) => {
-          localStorage.removeItem("__token");
-          throw err;
-        });
-    } else {
-      dispatch(SignIn(false));
-      localStorage.removeItem("wishList");
-      localStorage.removeItem("cart");  
+    if(Date.now() >= token.expireTime*1000) {
+      await Request.RefreshToken(`${process.env.REACT_APP_SERVER_URL}/refreshToken`, token.refreshToken).then((res: any) => {
+      token = JSON.parse(String(localStorage.getItem("__token")));
+      }).catch((err: any) => {
+        localStorage.removeItem("__token");
+        dispatch(SignIn(false));
+        return;
+      })
     }
+    await Request.PostWithAuthentication(
+      `${process.env.REACT_APP_SERVER_URL}/user/info`,
+      token.token
+    )
+      .then((res: any) => {
+        if(localStorage.wishList) {
+          localStorage.removeItem("wishList");
+        }
+        if(res.data.wishLists.length > 0) {
+          Helper.saveToLocalStorage("wishList", res.data.wishLists)
+        }
+        if(localStorage.cart) {
+          localStorage.removeItem("cart");
+        }
+        if(res.data.carts.length > 0) {
+          Helper.saveToLocalStorage("cart", res.data.carts)
+        }
+        dispatch(SignIn(res.data));
+      })
+      .catch((err: any) => {
+        localStorage.removeItem("__token");
+        dispatch(SignIn(false));
+        localStorage.removeItem("wishList");
+        localStorage.removeItem("cart");
+        throw err;
+      });
   };
   useEffect(() => {
-    verifyToken();
+    let token = JSON.parse(String(localStorage.getItem("__token")));
+    if(token) {
+      verifyToken();
+    }
     Request.GetData(
       `${process.env.REACT_APP_SERVER_URL}/api/all-products`
     ).then((result: any) => {
