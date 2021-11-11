@@ -311,15 +311,15 @@ const Delivery = () => {
           </div>
 
           <div>
-            <InputComponent label="Street Number/Street Name" />
+            <InputComponent label="Street Number/Street Name" name="street" />
           </div>
           <div>
-            <InputComponent label="Building Name/Floor Etc" />
+            <InputComponent label="Building Name/Floor Etc" name="building" />
           </div>
 
           <div className="row justify-content-between">
             <div style={{ width: "49%", height: "fit-content" }}>
-              <InputComponent label="Postal Code" />
+              <InputComponent label="Postal Code" name="postal code"/>
             </div>
             <div style={{ width: "49%", height: "fit-content" }}>
               <InputComponent

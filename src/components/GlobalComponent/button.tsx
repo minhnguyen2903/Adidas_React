@@ -14,7 +14,7 @@ export const ButtonActive = (props:any) => {
 export const ButtonHover = (props:any) => {
     return (
         <div className={`${styles.button_hover}`} style={props.style}>
-        <button className="w-100 d-flex justify-content-between">
+        <button className="w-100 d-flex justify-content-between" onClick={props.action}>
             <span className="text-uppercase text-700 letter-spacing">{props.text}</span><Icon>east</Icon>
         </button>
         </div>
